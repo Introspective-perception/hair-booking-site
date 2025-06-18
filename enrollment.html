@@ -166,7 +166,6 @@
       <p class="kit-info">A full professional kit is included in the course price.</p>
       <div class="card-footer">Select Tape-In</div>
     </div>
-    <!-- === UPDATED: Wefts card simplified, dropdown removed === -->
     <div class="card" data-id="wefts" data-price="1400" data-duration="2-Day Training">
       <h2>Wefts (Beaded, Seamless & Cornrow)</h2>
       <div class="price">$1400 · 2-Day Training</div>
@@ -174,7 +173,6 @@
       <p class="kit-info">A full professional kit is included in the course price.</p>
       <div class="card-footer">Select Weft Methods</div>
     </div>
-    <!-- === END OF UPDATED SECTION === -->
     <div class="card" data-id="all-in-one" data-price="3500" data-duration="5-Day Training">
       <h2>All-In-One Intensive</h2>
       <div class="price">$3500 · 5-Day Training</div>
@@ -182,6 +180,15 @@
       <p class="kit-info">A full professional kit is included in the course price.</p>
       <div class="card-footer">Select All-In-One</div>
     </div>
+    <!-- === NEW: Temporary Test Course === -->
+    <!-- You can delete this entire block after you are done testing -->
+    <div class="card" data-id="test-course" data-price="1" data-duration="Test">
+      <h2>Test Course</h2>
+      <div class="price">$1.00</div>
+      <p>This is for testing the payment and booking flow. Please do not select unless you are the site administrator.</p>
+      <div class="card-footer">Select Test Course</div>
+    </div>
+    <!-- === END OF TEST COURSE === -->
   </div>
 
   <div class="continue-section">
@@ -193,7 +200,6 @@
     &copy; 2025 Private Hair Extension Training
   </footer>
 
-  <!-- === UPDATED: Script simplified, dropdown logic removed === -->
   <script>
     localStorage.clear();
 
@@ -209,33 +215,37 @@
         const price = parseInt(card.dataset.price);
         const duration = card.dataset.duration;
         const isAllInOne = id === "all-in-one";
-        
-        const courseData = { id, name, price, duration };
+        const isTestCourse = id === "test-course";
 
-        if (isAllInOne) {
-          const isSelected = card.classList.contains('selected');
-          cards.forEach(c => c.classList.remove("selected"));
-          selectedCourses = [];
-          if (!isSelected) {
-              card.classList.add("selected");
-              selectedCourses.push(courseData);
-          }
-        } else {
-          document.querySelector('[data-id="all-in-one"]').classList.remove("selected");
-          selectedCourses = selectedCourses.filter(course => course.id !== "all-in-one");
-          
-          card.classList.toggle("selected");
-          
-          const existingCourseIndex = selectedCourses.findIndex(c => c.id === id);
-          if (card.classList.contains("selected")) {
-            if (existingCourseIndex === -1) {
+        const courseData = { id, name, price, duration };
+        
+        // Allow multiple selections unless All-In-One or Test Course is chosen
+        if (isAllInOne || isTestCourse) {
+            const isSelected = card.classList.contains('selected');
+            cards.forEach(c => c.classList.remove("selected"));
+            selectedCourses = [];
+            if (!isSelected) {
+                card.classList.add("selected");
                 selectedCourses.push(courseData);
             }
-          } else {
-            if (existingCourseIndex > -1) {
-                selectedCourses.splice(existingCourseIndex, 1);
+        } else {
+            // Deselect all-in-one and test course if another course is chosen
+            document.querySelector('[data-id="all-in-one"]').classList.remove("selected");
+            document.querySelector('[data-id="test-course"]').classList.remove("selected");
+            selectedCourses = selectedCourses.filter(c => c.id !== "all-in-one" && c.id !== "test-course");
+            
+            card.classList.toggle("selected");
+            
+            const existingCourseIndex = selectedCourses.findIndex(c => c.id === id);
+            if (card.classList.contains("selected")) {
+                if (existingCourseIndex === -1) {
+                    selectedCourses.push(courseData);
+                }
+            } else {
+                if (existingCourseIndex > -1) {
+                    selectedCourses.splice(existingCourseIndex, 1);
+                }
             }
-          }
         }
         errorMessage.style.display = 'none';
       });
