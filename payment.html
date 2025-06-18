@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirm Your Deposit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+  <!-- === IMPORTANT: PayPal SDK Script === -->
+  <!-- You will need to replace YOUR_PAYPAL_CLIENT_ID with your own ID from your PayPal Developer account -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=CAD"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background: #111;
+      color: #f0f0f0;
+      scroll-behavior: smooth;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(17,17,17,0.9);
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      z-index: 1000;
+      border-bottom: 1px solid #333;
+    }
+    nav a {
+      color: #f3c6c6;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.2rem 0.4rem;
+    }
+    .page-content {
+      padding: 6rem 1rem;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      color: #f6d3dc;
+      margin-bottom: 0.5rem;
+    }
+    p.subtitle {
+        color: #ccc;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+    .summary-box {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 1.5rem 2rem;
+        margin: 1rem auto;
+        text-align: left;
+    }
+    .summary-box h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        color: #f3c6c6;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #333;
+        padding-bottom: 0.5rem;
+    }
+    #course-list { list-style: none; padding: 0; margin: 0; }
+    #course-list li { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 1rem; }
+    #course-list li .duration { color: #aaa; font-size: 0.85rem; margin-left: 1rem; }
+    .price-details { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #333; font-weight: bold; }
+    .price-line { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .price-line.deposit { font-size: 1.25rem; color: #f5d76e; }
+
+    #paypal-button-container {
+        margin-top: 2rem;
+    }
+    .policy-box {
+        margin-top: 3rem;
+        font-size: 0.85rem;
+        color: #888;
+        line-height: 1.6;
+    }
+     .policy-box strong {
+        color: #aaa;
+     }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="enrollment.html">Courses</a>
+  </nav>
+
+  <div class="page-content">
+    <h1>Thank You For Scheduling!</h1>
+    <p class="subtitle">Please complete your booking by paying the required deposit below.</p>
+
+    <div class="summary-box">
+        <h2>Your Booking Summary</h2>
+        <ul id="course-list"></ul>
+        <div class="price-details">
+            <div class="price-line deposit">
+                <span>50% Deposit Due Today:</span>
+                <span id="deposit-price-output">$0.00</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- This div is where the PayPal button will appear -->
+    <div id="paypal-button-container"></div>
+
+    <div class="policy-box">
+        <p>
+            <strong>Reminder:</strong> To secure your training date, a 50% deposit is required. The remaining balance is due on the first day of training. The deposit is <strong>non-refundable for no-shows</strong>. If you need to reschedule, you must do so at least <strong>48 hours</strong> prior to your appointment for the deposit to be transferred to a new date.
+        </p>
+    </div>
+  </div>
+
+  <script>
+    let depositAmount = 0;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const courseListElement = document.getElementById('course-list');
+        const depositPriceElement = document.getElementById('deposit-price-output');
+        const selectionJSON = localStorage.getItem("trainingSelectionDetails");
+
+        if (selectionJSON) {
+            try {
+                const selectedCourses = JSON.parse(selectionJSON);
+                let totalPrice = 0;
+
+                courseListElement.innerHTML = ''; 
+
+                selectedCourses.forEach(course => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <span>${course.name} <span class="duration">(${course.duration})</span></span>
+                        <span>$${course.price.toFixed(2)}</span>
+                    `;
+                    courseListElement.appendChild(listItem);
+                    totalPrice += course.price;
+                });
+
+                depositAmount = (totalPrice / 2);
+                depositPriceElement.textContent = `$${depositAmount.toFixed(2)}`;
+                renderPayPalButton();
+
+            } catch (e) {
+                courseListElement.innerHTML = '<li>There was an error loading your selection.</li>';
+            }
+        } else {
+            courseListElement.innerHTML = '<li>No course selected. Please <a href="enrollment.html" style="color: #f3c6c6;">go back</a> to select a course.</li>';
+        }
+    });
+
+    function renderPayPalButton() {
+        if (depositAmount <= 0) return;
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                // Set up the transaction
+                return actions.order.create({
+                    purchase_units: [{
+                        description: 'Deposit for Hair Extension Training',
+                        amount: {
+                            value: depositAmount.toFixed(2),
+                            currency_code: 'CAD'
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                // This function executes when the payment is approved by the user
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to your buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    // Here you could redirect to a final "thank you" page
+                });
+            },
+            onError: function (err) {
+                // Log the error to the console
+                console.error('An error occurred with the PayPal button:', err);
+            }
+        }).render('#paypal-button-container');
+    }
+  </script>
+</body>
+</html>
