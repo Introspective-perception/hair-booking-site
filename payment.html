@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Confirm Your Deposit</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
-  <!-- The PayPal script is now loaded dynamically by the script at the bottom of the page -->
+  <!-- The PayPal script is loaded dynamically -->
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
@@ -73,8 +73,7 @@
     #paypal-button-container { margin-top: 2rem; }
     .policy-box { margin-top: 3rem; font-size: 0.85rem; color: #888; line-height: 1.6; }
     .policy-box strong { color: #aaa; }
-    #payment-success-message { display: none; padding: 2rem; background: #222; border-radius: 12px; }
-    #local-file-error { display: none; padding: 2rem; background: #222; border-radius: 12px; }
+    #payment-status { display: none; padding: 2rem; background: #222; border-radius: 12px; }
     .button {
       display:inline-block; 
       text-decoration: none; 
@@ -101,7 +100,6 @@
     <div id="payment-section">
       <h1>Step 1: Confirm Your Deposit</h1>
       <p class="subtitle">Please confirm your selection and pay the required 50% deposit below.</p>
-
       <div class="summary-box">
           <h2>Your Booking Summary</h2>
           <ul id="course-list"></ul>
@@ -112,46 +110,39 @@
               </div>
           </div>
       </div>
-      
       <div id="paypal-button-container"></div>
-
       <div class="policy-box">
           <p><strong>Reminder:</strong> The 50% deposit is required to book your training. It is non-refundable for no-shows. To reschedule, please provide at least 48 hours notice.</p>
       </div>
     </div>
 
-    <div id="payment-success-message">
-        <h1>Payment Successful!</h1>
-        <p class="subtitle">Your deposit has been processed. Please click the button below to schedule your appointment.</p>
-        <a href="https://calendly.com/katerinaloop/private-hair-extension-training" class="button">Schedule Your Training</a>
-    </div>
-
-    <div id="local-file-error">
-        <h1>Payment Error</h1>
-        <p class="subtitle" style="color: #c74b50;">Payments can not be processed when running the site directly from your computer.</p>
-        <p>This is expected! The PayPal button will only appear on the live website. Please test the payment flow there.</p>
-        <br>
-        <a href="http://www.jlhair.ca" class="button" style="text-decoration: none;">Go to Live Website</a>
-    </div>
+    <!-- This container will now show all status messages -->
+    <div id="payment-status"></div>
   </div>
 
   <script>
     let depositAmount = 0;
+    const paymentStatusContainer = document.getElementById('payment-status');
+    const paymentSection = document.getElementById('payment-section');
 
-    // This function dynamically loads the PayPal script.
     function loadPayPalScript(callback) {
         const script = document.createElement('script');
+        // Make sure to use your LIVE Client ID here when you are ready to launch
         script.src = "https://www.paypal.com/sdk/js?client-id=AcaeuVH42XaEWKk8Gw4s0WXEN2fcYYSLiZzkYIoXaLkgzIQMvhJJV6t-vogwRz6GiMTMU1urz2Hom-E6&currency=CAD";
         script.onload = callback;
         document.head.appendChild(script);
     }
     
     document.addEventListener('DOMContentLoaded', () => {
-        // Check if the page is running on a live server (http or https)
         if (!window.location.protocol.startsWith('http')) {
-            document.getElementById('payment-section').style.display = 'none';
-            document.getElementById('local-file-error').style.display = 'block';
-            return; // Stop the script if it's a local file
+            paymentSection.style.display = 'none';
+            paymentStatusContainer.style.display = 'block';
+            paymentStatusContainer.innerHTML = `
+                <h1>Payment Error</h1>
+                <p class="subtitle" style="color: #c74b50;">Payments can not be processed when running from a local file.</p>
+                <p>Please test the payment flow on the live website.</p><br>
+                <a href="http://www.jlhair.ca" class="button" style="text-decoration: none;">Go to Live Website</a>`;
+            return;
         }
 
         const selectionJSON = localStorage.getItem("trainingSelectionDetails");
@@ -159,62 +150,65 @@
             try {
                 const selectedCourses = JSON.parse(selectionJSON);
                 let totalPrice = 0;
-                
                 const courseListElement = document.getElementById('course-list');
                 courseListElement.innerHTML = '';
-
                 selectedCourses.forEach(course => {
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `
-                        <span>${course.name} <span class="duration">(${course.duration})</span></span>
-                        <span>$${course.price.toFixed(2)}</span>
-                    `;
+                    listItem.innerHTML = `<span>${course.name} <span class="duration">(${course.duration})</span></span><span>$${course.price.toFixed(2)}</span>`;
                     courseListElement.appendChild(listItem);
                     totalPrice += course.price;
                 });
-
                 depositAmount = (totalPrice / 2);
                 document.getElementById('deposit-price-output').textContent = `$${depositAmount.toFixed(2)}`;
-                
-                // Load the PayPal script, and once it's loaded, render the button.
-                loadPayPalScript(() => {
-                    renderPayPalButton();
-                });
-
+                loadPayPalScript(renderPayPalButton);
             } catch (e) {
-                document.getElementById('payment-section').innerHTML = '<h1>Error</h1><p>There was an error loading your selection. Please go back and try again.</p>';
+                paymentSection.innerHTML = '<h1>Error</h1><p>There was an error loading your selection. Please go back and try again.</p>';
             }
         } else {
-             document.getElementById('payment-section').innerHTML = '<h1>No Course Selected</h1><p>Please <a href="enrollment.html" style="color: #f3c6c6;">go back</a> to select a course first.</p>';
+             paymentSection.innerHTML = '<h1>No Course Selected</h1><p>Please <a href="enrollment.html" style="color: #f3c6c6;">go back</a> to select a course first.</p>';
         }
     });
 
     function renderPayPalButton() {
         if (depositAmount <= 0) return;
-
         paypal.Buttons({
             createOrder: (data, actions) => {
                 return actions.order.create({
-                    application_context: {
-                        shipping_preference: 'NO_SHIPPING'
-                    },
+                    application_context: { shipping_preference: 'NO_SHIPPING' },
                     purchase_units: [{
                         description: 'Deposit for Hair Extension Training',
-                        amount: { 
-                            value: depositAmount.toFixed(2), 
-                            currency_code: 'CAD' 
-                        }
+                        amount: { value: depositAmount.toFixed(2), currency_code: 'CAD' }
                     }]
                 });
             },
+            // === UPDATED onApprove logic for secure transactions ===
             onApprove: (data, actions) => {
+                paymentSection.innerHTML = `<h1>Processing your payment...</h1><p class="subtitle">Please do not close this window.</p>`;
                 return actions.order.capture().then(details => {
-                    document.getElementById('payment-section').style.display = 'none';
-                    document.getElementById('local-file-error').style.display = 'none';
-                    document.getElementById('payment-success-message').style.display = 'block';
+                    // This block only runs after PayPal confirms the payment is successful
+                    paymentSection.style.display = 'none';
+                    paymentStatusContainer.style.display = 'block';
+                    paymentStatusContainer.innerHTML = `
+                        <h1>Payment Successful!</h1>
+                        <p class="subtitle">Your deposit has been processed. Your spot is secure. Please click the button below to schedule your appointment.</p>
+                        <a href="https://calendly.com/katerinaloop/private-hair-extension-training" class="button">Schedule Your Training</a>`;
+                }).catch(err => {
+                    // This block runs if payment capture fails
+                    console.error("Payment Capture Failed:", err);
+                    paymentSection.style.display = 'none';
+                    paymentStatusContainer.style.display = 'block';
+                    paymentStatusContainer.innerHTML = `
+                        <h1>Payment Failed</h1>
+                        <p class="subtitle" style="color: #c74b50;">We were unable to process your payment. No funds were charged.</p>
+                        <p>Please try again, or contact us if the problem persists.</p><br>
+                        <a href="enrollment.html" class="button" style="text-decoration: none;">Try Again</a>`;
                 });
             },
-            onError: (err) => console.error('An error occurred with the PayPal button:', err),
+            onError: (err) => {
+                console.error('An error occurred with the PayPal button:', err);
+                 paymentStatusContainer.style.display = 'block';
+                 paymentStatusContainer.innerHTML = `<h1>Error</h1><p>An unexpected error occurred. Please refresh the page and try again.</p>`;
+            }
         }).render('#paypal-button-container');
     }
   </script>
