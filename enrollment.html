@@ -32,12 +32,6 @@
       text-decoration: none;
       font-weight: 500;
       padding: 0.2rem 0.4rem;
-      transition: color 0.3s ease;
-    }
-    nav a:hover,
-    nav a.active {
-      color: #fff;
-      border-bottom: 2px solid #f6d3dc;
     }
     h1 {
       font-family: 'Cormorant Garamond', serif;
@@ -67,13 +61,8 @@
       border: 2px solid transparent;
       cursor: pointer;
     }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 25px rgba(246, 211, 220, 0.1);
-    }
-    .card.selected {
+     .card.selected {
       border: 2px solid #f6d3dc;
-      box-shadow: 0 0 15px rgba(246, 211, 220, 0.2);
       background: #222;
     }
     .card h2 {
@@ -102,27 +91,6 @@
         padding-top: 1rem;
         border-top: 1px solid #333;
     }
-    .weft-select-group {
-        margin-top: 1rem;
-    }
-    .weft-select-group label {
-        font-size: 0.9rem;
-        font-weight: bold;
-        color: #f3c6c6;
-        display: block;
-        margin-bottom: 0.5rem;
-    }
-    #weft-type-select {
-        width: 100%;
-        padding: 0.6rem;
-        background: #222;
-        color: #fff;
-        border: 1px solid #444;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        font-family: 'Montserrat', sans-serif;
-        cursor: pointer;
-    }
     .card-footer {
         margin-top: 1.5rem;
         text-align: center;
@@ -131,7 +99,6 @@
         padding: 0.7rem;
         border: 1px solid #f6d3dc;
         border-radius: 30px;
-        transition: 0.3s ease;
     }
     .card.selected .card-footer {
         background: #f6d3dc;
@@ -147,7 +114,6 @@
         font-weight: bold;
         margin-bottom: 1rem;
         display: none;
-        transition: opacity 0.3s ease;
     }
     .button {
       background: #c74b50;
@@ -156,14 +122,8 @@
       padding: 1rem 2.5rem;
       border-radius: 30px;
       font-weight: bold;
-      text-align: center;
       font-size: 1rem;
       cursor: pointer;
-      transition: 0.3s ease;
-    }
-    .button:hover {
-      background: #a63e45;
-      transform: scale(1.05);
     }
     footer {
       text-align: center;
@@ -185,7 +145,6 @@
   <h1>Choose Your Course(s)</h1>
 
   <div class="pricing-grid">
-    <!-- === PRICES UPDATED HERE === -->
     <div class="card" data-id="k-tip" data-price="1400" data-duration="2-Day Training">
       <h2>K-Tip (Keratin Bond)</h2>
       <div class="price">$1400 · 2-Day Training</div>
@@ -193,7 +152,6 @@
       <p class="kit-info">A full professional kit is included in the course price.</p>
       <div class="card-footer">Select K-Tip</div>
     </div>
-
     <div class="card" data-id="i-tip" data-price="1400" data-duration="2-Day Training">
       <h2>I-Tip / Nano Beads</h2>
       <div class="price">$1400 · 2-Day Training</div>
@@ -201,7 +159,6 @@
       <p class="kit-info">A full professional kit is included in the course price.</p>
       <div class="card-footer">Select I-Tip / Nano</div>
     </div>
-
     <div class="card" data-id="tape-in" data-price="1400" data-duration="2-Day Training">
       <h2>Tape-In Extensions</h2>
       <div class="price">$1400 · 2-Day Training</div>
@@ -209,23 +166,15 @@
       <p class="kit-info">A full professional kit is included in the course price.</p>
       <div class="card-footer">Select Tape-In</div>
     </div>
-
+    <!-- === UPDATED: Wefts card simplified, dropdown removed === -->
     <div class="card" data-id="wefts" data-price="1400" data-duration="2-Day Training">
-      <h2>Wefts</h2>
+      <h2>Wefts (Beaded, Seamless & Cornrow)</h2>
       <div class="price">$1400 · 2-Day Training</div>
-      <p>Install hand-tied wefts on a secure foundation, learning proper tension, stitching, and finishing work.</p>
-      <div class="weft-select-group">
-        <label for="weft-type-select">Choose a Weft Technique:</label>
-        <select id="weft-type-select">
-          <option value="Beaded Foundation">Beaded Foundation</option>
-          <option value="Seamless Method">Seamless Method</option>
-          <option value="Cornrow Sew-in">Cornrow Sew-in</option>
-        </select>
-      </div>
+      <p>Learn to install hand-tied wefts using all modern foundation techniques, including beaded, seamless, and cornrow bases.</p>
       <p class="kit-info">A full professional kit is included in the course price.</p>
-      <div class="card-footer">Select Weft Method</div>
+      <div class="card-footer">Select Weft Methods</div>
     </div>
-
+    <!-- === END OF UPDATED SECTION === -->
     <div class="card" data-id="all-in-one" data-price="3500" data-duration="5-Day Training">
       <h2>All-In-One Intensive</h2>
       <div class="price">$3500 · 5-Day Training</div>
@@ -237,52 +186,30 @@
 
   <div class="continue-section">
     <div id="error-message">Please select at least one course before continuing.</div>
-    <button id="continue-btn" class="button">Continue to Booking</button>
+    <button id="continue-btn" class="button">Continue to Payment</button>
   </div>
 
   <footer>
     &copy; 2025 Private Hair Extension Training
   </footer>
 
+  <!-- === UPDATED: Script simplified, dropdown logic removed === -->
   <script>
     localStorage.clear();
 
     const cards = document.querySelectorAll(".card");
     const continueBtn = document.getElementById('continue-btn');
     const errorMessage = document.getElementById('error-message');
-    const weftSelect = document.getElementById('weft-type-select');
     let selectedCourses = [];
-
-    weftSelect.addEventListener('click', (event) => {
-        event.stopPropagation();
-    });
-
-    weftSelect.addEventListener('change', () => {
-        const weftCard = document.querySelector('[data-id="wefts"]');
-        if (weftCard.classList.contains('selected')) {
-            selectedCourses = selectedCourses.filter(course => course.id !== 'wefts');
-            const courseName = `Wefts (${weftSelect.value})`;
-            selectedCourses.push({
-                id: 'wefts',
-                name: courseName,
-                price: parseInt(weftCard.dataset.price),
-                duration: weftCard.dataset.duration
-            });
-        }
-    });
 
     cards.forEach(card => {
       card.addEventListener("click", () => {
         const id = card.dataset.id;
-        let name = card.querySelector("h2").textContent;
+        const name = card.querySelector("h2").textContent;
         const price = parseInt(card.dataset.price);
         const duration = card.dataset.duration;
         const isAllInOne = id === "all-in-one";
-
-        if (id === 'wefts') {
-            name = `Wefts (${weftSelect.value})`;
-        }
-
+        
         const courseData = { id, name, price, duration };
 
         if (isAllInOne) {
@@ -300,7 +227,6 @@
           card.classList.toggle("selected");
           
           const existingCourseIndex = selectedCourses.findIndex(c => c.id === id);
-
           if (card.classList.contains("selected")) {
             if (existingCourseIndex === -1) {
                 selectedCourses.push(courseData);
@@ -321,7 +247,7 @@
         return;
       }
       localStorage.setItem("trainingSelectionDetails", JSON.stringify(selectedCourses));
-      window.location.href = "booking.html";
+      window.location.href = "payment.html";
     });
   </script>
 </body>
