@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Confirm Your Deposit</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
-  <!-- === YOUR LIVE PAYPAL CLIENT ID IS NOW INCLUDED === -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AcaeuVH42XaEWKk8Gw4s0WXEN2fcYYSLiZzkYIoXaLkgzIQMvhJJV6t-vogwRz6GiMTMU1urz2Hom-E6&currency=CAD"></script>
+  <!-- The PayPal script is now loaded dynamically by the script at the bottom of the page -->
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
@@ -127,7 +126,6 @@
         <a href="https://calendly.com/katerinaloop/private-hair-extension-training" class="button">Schedule Your Training</a>
     </div>
 
-    <!-- NEW: This message will show if the page is opened from a local file -->
     <div id="local-file-error">
         <h1>Payment Error</h1>
         <p class="subtitle" style="color: #c74b50;">Payments can not be processed when running the site directly from your computer.</p>
@@ -140,9 +138,17 @@
   <script>
     let depositAmount = 0;
 
+    // This function dynamically loads the PayPal script.
+    function loadPayPalScript(callback) {
+        const script = document.createElement('script');
+        script.src = "https://www.paypal.com/sdk/js?client-id=AcaeuVH42XaEWKk8Gw4s0WXEN2fcYYSLiZzkYIoXaLkgzIQMvhJJV6t-vogwRz6GiMTMU1urz2Hom-E6&currency=CAD";
+        script.onload = callback;
+        document.head.appendChild(script);
+    }
+    
     document.addEventListener('DOMContentLoaded', () => {
-        // NEW: Check if the page is running locally vs on a web server
-        if (window.location.protocol === 'file:') {
+        // Check if the page is running on a live server (http or https)
+        if (!window.location.protocol.startsWith('http')) {
             document.getElementById('payment-section').style.display = 'none';
             document.getElementById('local-file-error').style.display = 'block';
             return; // Stop the script if it's a local file
@@ -169,7 +175,11 @@
 
                 depositAmount = (totalPrice / 2);
                 document.getElementById('deposit-price-output').textContent = `$${depositAmount.toFixed(2)}`;
-                renderPayPalButton();
+                
+                // Load the PayPal script, and once it's loaded, render the button.
+                loadPayPalScript(() => {
+                    renderPayPalButton();
+                });
 
             } catch (e) {
                 document.getElementById('payment-section').innerHTML = '<h1>Error</h1><p>There was an error loading your selection. Please go back and try again.</p>';
@@ -185,15 +195,20 @@
         paypal.Buttons({
             createOrder: (data, actions) => {
                 return actions.order.create({
+                    application_context: {
+                        shipping_preference: 'NO_SHIPPING'
+                    },
                     purchase_units: [{
                         description: 'Deposit for Hair Extension Training',
-                        amount: { value: depositAmount.toFixed(2), currency_code: 'CAD' }
+                        amount: { 
+                            value: depositAmount.toFixed(2), 
+                            currency_code: 'CAD' 
+                        }
                     }]
                 });
             },
             onApprove: (data, actions) => {
                 return actions.order.capture().then(details => {
-                    // Hide payment section and show success message
                     document.getElementById('payment-section').style.display = 'none';
                     document.getElementById('local-file-error').style.display = 'none';
                     document.getElementById('payment-success-message').style.display = 'block';
