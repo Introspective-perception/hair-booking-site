@@ -6,7 +6,6 @@
   <title>Expert Hair Extension Training</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* --- Base Styles (Unchanged) --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       font-family: 'Montserrat', sans-serif;
@@ -117,37 +116,6 @@
       margin: 0.6rem auto 0;
       background: linear-gradient(to right, #f6d3dc, #b8860b);
     }
-    .enroll-cta {
-      text-align: center;
-      padding: 3rem 1.5rem;
-    }
-    .button {
-      display: inline-block;
-      padding: 1rem 2rem;
-      margin-top: 1rem;
-      background: #c74b50;
-      color: #fff;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: background 0.3s ease, transform 0.2s ease;
-      cursor: pointer;
-      border: none;
-    }
-    .button:hover {
-      background: #a63e45;
-      transform: scale(1.05);
-    }
-    footer {
-      background: #181818;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #888;
-    }
-    
-    /* --- Accordion Styles --- */
     .accordion {
         border-top: 1px solid #333;
     }
@@ -183,7 +151,7 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-        padding: 0 1.5rem; /* Increased padding */
+        padding: 0 1.5rem;
     }
     .accordion-content p {
         font-size: 0.9rem;
@@ -192,105 +160,39 @@
         padding-bottom: 1.5rem;
     }
     .accordion-item.active .accordion-content {
-        max-height: 250px; /* Adjusted for longer content */
-        padding: 0 1.5rem;
+        max-height: 250px;
     }
     .accordion-item.active .accordion-icon {
         transform: rotate(45deg);
     }
-
-    /* === UPDATED: AI Assistant Styles === */
-    #ai-assistant {
-        background-color: #1a1a1a;
-        border-radius: 12px;
-        padding: 2.5rem;
-        margin-top: 2rem;
+    .enroll-cta {
+      text-align: center;
+      padding: 3rem 1.5rem;
     }
-    .ai-input-group {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1.5rem;
+    .button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin-top: 1rem;
+      background: #c74b50;
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+      border: none;
     }
-    #ai-question-input {
-        flex-grow: 1;
-        background: #222;
-        color: #fff;
-        border: 1px solid #444;
-        border-radius: 8px;
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-        font-family: 'Montserrat', sans-serif;
+    .button:hover {
+      background: #a63e45;
+      transform: scale(1.05);
     }
-    #ai-question-input:focus {
-        outline: none;
-        border-color: #f3c6c6;
-    }
-    #ai-response-area {
-        margin-top: 2rem;
-        padding: 1.5rem;
-        background: #222;
-        border-radius: 8px;
-        color: #ddd;
-        border: 1px dashed #444;
-        min-height: 80px; /* Increased min-height */
-    }
-    .ai-response-header {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-        font-weight: bold;
-        color: #f3c6c6;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-    .ai-response-header svg {
-        width: 18px;
-        height: 18px;
-        fill: #f3c6c6;
-    }
-    #ai-response-area p {
-        font-size: 0.95rem;
-        line-height: 1.8;
-        white-space: pre-wrap;
-        opacity: 0; /* Start invisible for animation */
-        transform: translateY(10px); /* Start slightly lower */
-        animation: fadeIn 0.5s forwards;
-    }
-    .loading-spinner {
-        border: 4px solid rgba(255, 255, 255, 0.2);
-        border-left-color: #f3c6c6;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        animation: spin 1s linear infinite;
-        margin: 20px auto;
-    }
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-    @keyframes fadeIn {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    /* === END: AI Styles === */
-
-    @media (max-width: 500px) {
-      nav {
-        flex-wrap: wrap;
-        gap: 0.8rem;
-        font-size: 0.85rem;
-      }
-      .button {
-        width: 100%;
-        text-align: center;
-      }
-      .ai-input-group {
-        flex-direction: column;
-      }
+    footer {
+      background: #181818;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
     }
   </style>
 </head>
@@ -303,7 +205,9 @@
   </nav>
 
   <div class="hero">
-    <img src="https://images.unsplash.com/photo-1599387737255-7467929a7eda?q=80&w=2574&auto=format&fit=crop" alt="Stylist teaching hair extensions" />
+    <!-- === IMAGE LINK UPDATED === -->
+    <!-- This now points to a file in your repository -->
+    <img src="hero-image.png" alt="Joanna Luca teaching hair extension techniques" />
     <div class="overlay">
       <h1>Excellence in Extensions</h1>
       <h2>One-on-One Hair Extension Mentorship</h2>
@@ -326,14 +230,13 @@
   <section id="methods">
     <h2 class="section-title">Extension Methods You Can Learn</h2>
     <div class="accordion">
-      <!-- === UPDATED: Longer Descriptions === -->
       <div class="accordion-item">
         <button class="accordion-header">
           <h3>K-Tip (Keratin Bond)</h3>
           <span class="accordion-icon">+</span>
         </button>
         <div class="accordion-content">
-          <p>Dive deep into the art of K-Tip extensions, a highly sought-after method known for creating natural, 360-degree movement. In this module, you will master the delicate process of attaching individual strands using a specialized heating tool to bond keratin tips. Joanna will guide you through crucial techniques like precise sectioning for clean installs, optimal bond placement to ensure client comfort and invisibility, and the safe removal process that protects hair integrity.</p>
+          <p>Dive deep into the art of K-Tip extensions, a highly sought-after method known for creating natural, 360-degree movement. In this module, you will master the delicate process of attaching individual strands using a specialized heating tool to bond keratin tips.</p>
         </div>
       </div>
       <div class="accordion-item">
@@ -342,7 +245,7 @@
           <span class="accordion-icon">+</span>
         </button>
         <div class="accordion-content">
-          <p>Discover the world of heat-free extensions with I-Tips and Nano Beads. This training focuses on the meticulous strand-by-strand application using tiny, secure beads. You will learn the correct way to thread beads, how to use pliers for secure clamping without causing damage, and the art of strategic placement for a seamless, natural finish that is both durable and easy to maintain.</p>
+          <p>Discover the world of heat-free extensions with I-Tips and Nano Beads. This training focuses on the meticulous strand-by-strand application using tiny, secure beads for a seamless, natural finish that is both durable and easy to maintain.</p>
         </div>
       </div>
       <div class="accordion-item">
@@ -351,7 +254,7 @@
           <span class="accordion-icon">+</span>
         </button>
         <div class="accordion-content">
-          <p>Master the most popular and fastest method in the industry: Tape-In extensions. This course teaches efficiency and precision, covering the flawless alignment of adhesive wefts to create a full, voluminous look. You will learn professional techniques for a clean application, damage-free removal, and the essential skill of re-taping and reapplying wefts for repeat clients.</p>
+          <p>Master the most popular and fastest method in the industry: Tape-In extensions. This course teaches efficiency and precision, covering the flawless alignment of adhesive wefts to create a full, voluminous look and damage-free removal.</p>
         </div>
       </div>
       <div class="accordion-item">
@@ -360,20 +263,10 @@
           <span class="accordion-icon">+</span>
         </button>
         <div class="accordion-content">
-          <p>Learn the foundational and highly versatile technique of installing Hand-Tied Wefts. This comprehensive training will show you how to build a secure and flat foundation using beads. You will master correct stitching patterns, how to maintain proper tension to prevent damage, and the expert finishing work required to blend the wefts seamlessly for a flawless and comfortable result.</p>
+          <p>Learn the foundational and highly versatile technique of installing Hand-Tied Wefts. This comprehensive training will show you how to build a secure and flat foundation using beads and master correct stitching patterns for a flawless result.</p>
         </div>
       </div>
     </div>
-  </section>
-
-  <section id="ai-assistant">
-      <h2 class="section-title">Have a Question?</h2>
-      <p style="text-align: center; color: #ccc; margin-top: -1rem; margin-bottom: 1rem;">Ask for more details about any of the methods listed above.</p>
-      <div class="ai-input-group">
-          <input type="text" id="ai-question-input" placeholder="e.g., Tell me more about K-Tip safety.">
-          <button id="ask-ai-button" class="button">Ask</button>
-      </div>
-      <div id="ai-response-area">Ask a question to see the AI-powered answer here.</div>
   </section>
 
   <section class="enroll-cta">
@@ -383,9 +276,8 @@
   <footer>
     &copy; 2025 Private Hair Extension Training
   </footer>
-  
+
   <script>
-    // --- Accordion Script (Unchanged) ---
     const accordionItems = document.querySelectorAll('.accordion-item');
     accordionItems.forEach(item => {
         const header = item.querySelector('.accordion-header');
@@ -396,66 +288,6 @@
                 item.classList.add('active');
             }
         });
-    });
-
-    // === UPDATED: AI Assistant Script ===
-    const askButton = document.getElementById('ask-ai-button');
-    const questionInput = document.getElementById('ai-question-input');
-    const responseArea = document.getElementById('ai-response-area');
-
-    askButton.addEventListener('click', async () => {
-        const userQuestion = questionInput.value;
-        if (!userQuestion) {
-            responseArea.textContent = 'Please enter a question first.';
-            return;
-        }
-
-        responseArea.innerHTML = '<div class="loading-spinner"></div>';
-
-        let context = "You are a helpful assistant for a master hair stylist named Joanna Luca. Based on the following course descriptions, answer the user's question. Provide a detailed, encouraging, and informative paragraph. \n\n";
-        document.querySelectorAll('.accordion-item').forEach(item => {
-            const title = item.querySelector('h3').textContent;
-            const description = item.querySelector('p').textContent;
-            context += `Method: ${title}\nDescription: ${description}\n\n`;
-        });
-        const prompt = context + "User's Question: " + userQuestion;
-        
-        try {
-            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-            const payload = { contents: chatHistory };
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
-            
-            const result = await response.json();
-            
-            if (result.candidates && result.candidates[0]?.content?.parts?.[0]) {
-              const text = result.candidates[0].content.parts[0].text;
-              
-              // UPDATED: Clear spinner and display formatted response
-              responseArea.innerHTML = `
-                <div class="ai-response-header">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10,0,0,0,2,12A10,10,0,0,0,12,22A10,10,0,0,0,22,12A10,10,0,0,0,12,2M8,12.5A1.5,1.5,0,1,1,9.5,11A1.5,1.5,0,0,1,8,12.5M16,12.5A1.5,1.5,0,1,1,17.5,11A1.5,1.5,0,0,1,16,12.5M12,18.5C9.5,18.5,7.5,17.5,6,16H18C16.5,17.5,14.5,18.5,12,18.5Z"/></svg>
-                  <span>Joanna's AI Assistant</span>
-                </div>
-                <p>${text}</p>
-              `;
-
-            } else {
-              responseArea.textContent = 'Sorry, the AI model returned an unexpected result.';
-            }
-
-        } catch (error) {
-            console.error("Error calling Gemini API:", error);
-            responseArea.textContent = "Sorry, there was an error getting a response. Please try again later.";
-        }
     });
   </script>
 
