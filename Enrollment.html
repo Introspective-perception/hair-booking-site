@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enroll in Training</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background: #111;
+      color: #f0f0f0;
+      scroll-behavior: smooth;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(17,17,17,0.9);
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      z-index: 1000;
+      border-bottom: 1px solid #333;
+    }
+    nav a {
+      color: #f3c6c6;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.2rem 0.4rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      color: #fff;
+      border-bottom: 2px solid #f6d3dc;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      color: #f6d3dc;
+      text-align: center;
+      margin-top: 6rem;
+      margin-bottom: 2rem;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    .card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 25px rgba(246, 211, 220, 0.1);
+    }
+    .card.selected {
+      border: 2px solid #f6d3dc;
+      box-shadow: 0 0 15px rgba(246, 211, 220, 0.2);
+      background: #222;
+    }
+    .card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: #f3c6c6;
+      margin-bottom: 0.6rem;
+    }
+    .card .price {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #f5d76e;
+      margin-bottom: 1rem;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    .kit-info {
+        font-size: 0.9rem;
+        color: #f3c6c6;
+        font-weight: bold;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #333;
+    }
+    .weft-select-group {
+        margin-top: 1rem;
+    }
+    .weft-select-group label {
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #f3c6c6;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    #weft-type-select {
+        width: 100%;
+        padding: 0.6rem;
+        background: #222;
+        color: #fff;
+        border: 1px solid #444;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-family: 'Montserrat', sans-serif;
+        cursor: pointer;
+    }
+    .card-footer {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        padding: 0.7rem;
+        border: 1px solid #f6d3dc;
+        border-radius: 30px;
+        transition: 0.3s ease;
+    }
+    .card.selected .card-footer {
+        background: #f6d3dc;
+        color: #111;
+    }
+    .continue-section {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 0 1rem;
+    }
+    #error-message {
+        color: #c74b50;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        display: none;
+        transition: opacity 0.3s ease;
+    }
+    .button {
+      background: #c74b50;
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 30px;
+      font-weight: bold;
+      text-align: center;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .button:hover {
+      background: #a63e45;
+      transform: scale(1.05);
+    }
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#methods">Methods</a>
+    <a href="enrollment.html" class="active">Enroll</a>
+  </nav>
+
+  <h1>Choose Your Course(s)</h1>
+
+  <div class="pricing-grid">
+    <!-- === PRICES UPDATED HERE === -->
+    <div class="card" data-id="k-tip" data-price="1400" data-duration="2-Day Training">
+      <h2>K-Tip (Keratin Bond)</h2>
+      <div class="price">$1400 · 2-Day Training</div>
+      <p>Learn the art of applying individual strands using keratin fusion for natural, 360-degree movement.</p>
+      <p class="kit-info">A full professional kit is included in the course price.</p>
+      <div class="card-footer">Select K-Tip</div>
+    </div>
+
+    <div class="card" data-id="i-tip" data-price="1400" data-duration="2-Day Training">
+      <h2>I-Tip / Nano Beads</h2>
+      <div class="price">$1400 · 2-Day Training</div>
+      <p>Master strand-by-strand installs using microbeads for a heat-free, damage-free, and secure application.</p>
+      <p class="kit-info">A full professional kit is included in the course price.</p>
+      <div class="card-footer">Select I-Tip / Nano</div>
+    </div>
+
+    <div class="card" data-id="tape-in" data-price="1400" data-duration="2-Day Training">
+      <h2>Tape-In Extensions</h2>
+      <div class="price">$1400 · 2-Day Training</div>
+      <p>Use adhesive-backed wefts for fast, seamless installs and learn clean removal and reapplication techniques.</p>
+      <p class="kit-info">A full professional kit is included in the course price.</p>
+      <div class="card-footer">Select Tape-In</div>
+    </div>
+
+    <div class="card" data-id="wefts" data-price="1400" data-duration="2-Day Training">
+      <h2>Wefts</h2>
+      <div class="price">$1400 · 2-Day Training</div>
+      <p>Install hand-tied wefts on a secure foundation, learning proper tension, stitching, and finishing work.</p>
+      <div class="weft-select-group">
+        <label for="weft-type-select">Choose a Weft Technique:</label>
+        <select id="weft-type-select">
+          <option value="Beaded Foundation">Beaded Foundation</option>
+          <option value="Seamless Method">Seamless Method</option>
+          <option value="Cornrow Sew-in">Cornrow Sew-in</option>
+        </select>
+      </div>
+      <p class="kit-info">A full professional kit is included in the course price.</p>
+      <div class="card-footer">Select Weft Method</div>
+    </div>
+
+    <div class="card" data-id="all-in-one" data-price="3500" data-duration="5-Day Training">
+      <h2>All-In-One Intensive</h2>
+      <div class="price">$3500 · 5-Day Training</div>
+      <p>Master all methods in one immersive training. Includes every kit and full access to Joanna’s hands-on guidance.</p>
+      <p class="kit-info">A full professional kit is included in the course price.</p>
+      <div class="card-footer">Select All-In-One</div>
+    </div>
+  </div>
+
+  <div class="continue-section">
+    <div id="error-message">Please select at least one course before continuing.</div>
+    <button id="continue-btn" class="button">Continue to Booking</button>
+  </div>
+
+  <footer>
+    &copy; 2025 Private Hair Extension Training
+  </footer>
+
+  <script>
+    localStorage.clear();
+
+    const cards = document.querySelectorAll(".card");
+    const continueBtn = document.getElementById('continue-btn');
+    const errorMessage = document.getElementById('error-message');
+    const weftSelect = document.getElementById('weft-type-select');
+    let selectedCourses = [];
+
+    weftSelect.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+    weftSelect.addEventListener('change', () => {
+        const weftCard = document.querySelector('[data-id="wefts"]');
+        if (weftCard.classList.contains('selected')) {
+            selectedCourses = selectedCourses.filter(course => course.id !== 'wefts');
+            const courseName = `Wefts (${weftSelect.value})`;
+            selectedCourses.push({
+                id: 'wefts',
+                name: courseName,
+                price: parseInt(weftCard.dataset.price),
+                duration: weftCard.dataset.duration
+            });
+        }
+    });
+
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        const id = card.dataset.id;
+        let name = card.querySelector("h2").textContent;
+        const price = parseInt(card.dataset.price);
+        const duration = card.dataset.duration;
+        const isAllInOne = id === "all-in-one";
+
+        if (id === 'wefts') {
+            name = `Wefts (${weftSelect.value})`;
+        }
+
+        const courseData = { id, name, price, duration };
+
+        if (isAllInOne) {
+          const isSelected = card.classList.contains('selected');
+          cards.forEach(c => c.classList.remove("selected"));
+          selectedCourses = [];
+          if (!isSelected) {
+              card.classList.add("selected");
+              selectedCourses.push(courseData);
+          }
+        } else {
+          document.querySelector('[data-id="all-in-one"]').classList.remove("selected");
+          selectedCourses = selectedCourses.filter(course => course.id !== "all-in-one");
+          
+          card.classList.toggle("selected");
+          
+          const existingCourseIndex = selectedCourses.findIndex(c => c.id === id);
+
+          if (card.classList.contains("selected")) {
+            if (existingCourseIndex === -1) {
+                selectedCourses.push(courseData);
+            }
+          } else {
+            if (existingCourseIndex > -1) {
+                selectedCourses.splice(existingCourseIndex, 1);
+            }
+          }
+        }
+        errorMessage.style.display = 'none';
+      });
+    });
+
+    continueBtn.addEventListener("click", () => {
+      if (selectedCourses.length === 0) {
+        errorMessage.style.display = 'block';
+        return;
+      }
+      localStorage.setItem("trainingSelectionDetails", JSON.stringify(selectedCourses));
+      window.location.href = "booking.html";
+    });
+  </script>
+</body>
+</html>

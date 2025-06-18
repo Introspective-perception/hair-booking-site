@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Your Training</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background: #111;
+      color: #f0f0f0;
+      scroll-behavior: smooth;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(17,17,17,0.9);
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      z-index: 1000;
+      border-bottom: 1px solid #333;
+    }
+    nav a {
+      color: #f3c6c6;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.2rem 0.4rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      color: #fff;
+      border-bottom: 2px solid #f6d3dc;
+    }
+    .page-content {
+      padding-top: 6rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      color: #f6d3dc;
+      margin-bottom: 1rem;
+    }
+    .booking-summary {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 1.5rem 2rem;
+        max-width: 800px;
+        margin: 1rem auto;
+        text-align: left;
+    }
+    .booking-summary h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        color: #f3c6c6;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #333;
+        padding-bottom: 0.5rem;
+    }
+    #course-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    #course-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        font-size: 1rem;
+    }
+     #course-list li .duration {
+        color: #aaa;
+        font-size: 0.85rem;
+        margin-left: 1rem;
+     }
+    .price-details {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #333;
+        font-weight: bold;
+    }
+    .price-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+    .price-line.total {
+        font-size: 1.25rem;
+        color: #f3c6c6;
+    }
+    .price-line.deposit {
+        font-size: 1.1rem;
+        color: #f5d76e;
+    }
+
+    .info-box {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.5rem 2rem;
+        max-width: 800px;
+        margin: 2rem auto;
+        text-align: left;
+    }
+    .info-box h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.25rem;
+        color: #f3c6c6;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+    }
+    .info-box h3 svg {
+        width: 20px;
+        height: 20px;
+        fill: #f3c6c6;
+        margin-right: 0.75rem;
+    }
+    .info-box p {
+        font-size: 0.9rem;
+        color: #ccc;
+        line-height: 1.7;
+    }
+    .info-box p strong {
+        color: #f0f0f0;
+    }
+    /* Style for the policy box */
+    .policy-box {
+        border: 1px solid #c74b50;
+    }
+     /* Style for the scheduling box */
+    .scheduling-box {
+        border: 1px solid #64b5f6; /* A different highlight color */
+    }
+
+    .calendar-container {
+        margin-top: 2rem;
+        min-height: 700px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#methods">Methods</a>
+    <a href="enrollment.html">Enroll</a>
+  </nav>
+
+  <div class="page-content">
+    <h1>Finalize Your Booking</h1>
+
+    <div class="booking-summary">
+        <h2>Your Selection</h2>
+        <ul id="course-list">
+            <!-- Course details populated here -->
+        </ul>
+        <div class="price-details">
+            <div class="price-line total">
+                <span>Total Course Price:</span>
+                <span id="total-price-output">$0</span>
+            </div>
+            <div class="price-line deposit">
+                <span>50% Deposit Due Today:</span>
+                <span id="deposit-price-output">$0</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="policy-box info-box">
+        <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7A3,3 0 0,1 15,10A3,3 0 0,1 12,13A3,3 0 0,1 9,10A3,3 0 0,1 12,7M17.5,18C15.93,19.82 14.07,20.83 12,21.26C9.93,20.83 8.07,19.82 6.5,18C6.5,16.25 9.88,14.5 12,14.5C14.12,14.5 17.5,16.25 17.5,18Z"/></svg>
+            Important Booking Policies
+        </h3>
+        <p>
+            To secure your training date, a <strong>50% deposit</strong> is required at the time of booking. The remaining balance is due on the first day of training.
+            Please note that the deposit is <strong>non-refundable for no-shows</strong>. If you need to reschedule, you must do so at least <strong>48 hours</strong> prior to your appointment for the deposit to be transferred to a new date.
+        </p>
+    </div>
+
+    <div class="scheduling-box info-box">
+        <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M16.53,11.06L15.47,10L10.5,14.97L8.47,12.94L7.4,14L10.5,17.09L16.53,11.06Z"/></svg>
+            Multi-Day Course Scheduling
+        </h3>
+        <!-- === TEXT UPDATED HERE === -->
+        <p>
+            The calendar below is for booking the <strong>first 4-hour session</strong> of your training. If you have selected a multi-day course, your remaining session(s) can be scheduled in person with Joanna at the end of your first appointment.
+        </p>
+    </div>
+
+    <div class="calendar-container">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/katerinaloop/private-hair-extension-training" style="min-width:320px;height:700px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Private Hair Extension Training
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const courseListElement = document.getElementById('course-list');
+        const totalPriceElement = document.getElementById('total-price-output');
+        const depositPriceElement = document.getElementById('deposit-price-output');
+        const selectionJSON = localStorage.getItem("trainingSelectionDetails");
+
+        if (selectionJSON) {
+            try {
+                const selectedCourses = JSON.parse(selectionJSON);
+                let totalPrice = 0;
+
+                courseListElement.innerHTML = ''; 
+
+                selectedCourses.forEach(course => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <span>${course.name} <span class="duration">(${course.duration})</span></span>
+                        <span>$${course.price}</span>
+                    `;
+                    courseListElement.appendChild(listItem);
+                    totalPrice += course.price;
+                });
+
+                const depositPrice = totalPrice / 2;
+                totalPriceElement.textContent = `$${totalPrice}`;
+                depositPriceElement.textContent = `$${depositPrice}`;
+
+            } catch (e) {
+                console.error("Error parsing selection details:", e);
+                courseListElement.innerHTML = '<li>There was an error loading your selection.</li>';
+            }
+        } else {
+            courseListElement.innerHTML = '<li>No course selected. Please <a href="enrollment.html" style="color: #f3c6c6;">go back</a> to select a course.</li>';
+            totalPriceElement.textContent = '$0';
+            depositPriceElement.textContent = '$0';
+        }
+    });
+  </script>
+</body>
+</html>
