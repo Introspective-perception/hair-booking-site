@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Expert Hair Extension Training</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expert Hair Extension Training</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      font-family: 'Montserrat', sans-serif;
-      background: #000000;
-      color: #f0f0f0;
-      scroll-behavior: smooth;
-    }
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(17,17,17,0.9);
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      padding: 0.8rem 1.2rem;
-      font-size: 0.95rem;
-      letter-spacing: 0.05em;
-      z-index: 1000;
-      border-bottom: 1px solid #333;
-    }
-    nav a {
-      color: #f3c6c6;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.2rem 0.4rem;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background: #111;
+      color: #f0f0f0;
+      scroll-behavior: smooth;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(17,17,17,0.9);
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      z-index: 1000;
+      border-bottom: 1px solid #333;
+    }
+    nav a {
+      color: #f3c6c6;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.2rem 0.4rem;
       transition: color 0.3s ease;
-    }
+    }
     nav a:hover,
     nav a.active {
       color: #fff;
@@ -45,7 +45,6 @@
       height: 100vh;
       overflow: hidden;
       margin: 0;
-      background: #000; /* Fallback for when image is not loaded */
     }
     .hero img {
       position: absolute;
@@ -89,18 +88,6 @@
       max-width: 1000px;
       margin: auto;
     }
-    #about {
-      color: #d0d0d0;
-      font-size: 0.95rem;
-      line-height: 1.75;
-      background-color: #121212;
-    }
-    #about p {
-      margin-bottom: 1.5rem;
-    }
-    #about strong {
-        color: #f3c6c6;
-    }
     h2.section-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.6rem, 5vw, 2.2rem);
@@ -117,169 +104,123 @@
       margin: 0.6rem auto 0;
       background: linear-gradient(to right, #f6d3dc, #b8860b);
     }
-    .accordion {
-        border-top: 1px solid #333;
-    }
-    .accordion-item {
-        border-bottom: 1px solid #333;
-    }
-    .accordion-header {
-        width: 100%;
-        background: transparent;
-        border: none;
-        padding: 1.5rem 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        text-align: left;
-    }
-    .accordion-header h3 {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.25rem;
-        color: #f3c6c6;
-        transition: color 0.3s ease;
-    }
-    .accordion-header:hover h3 {
-        color: #fff;
-    }
-    .accordion-icon {
-        font-size: 1.5rem;
-        color: #f3c6c6;
-        transition: transform 0.3s ease;
-    }
-    .accordion-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-        padding: 0 1.5rem;
-    }
-    .accordion-content p {
-        font-size: 0.9rem;
-        color: #ccc;
-        line-height: 1.7;
-        padding-bottom: 1.5rem;
-    }
-    .accordion-item.active .accordion-content {
-        max-height: 250px;
-    }
-    .accordion-item.active .accordion-icon {
-        transform: rotate(45deg);
-    }
-    #book {
-      padding: 3rem 1.5rem;
+    #about {
+      color: #d0d0d0;
+      font-size: 0.95rem;
+      line-height: 1.75;
       background-color: #121212;
     }
-    footer {
-      text-align: center;
-      margin-top: 4rem;
-      padding: 2rem;
-      font-size: 0.85rem;
-      color: #777;
-    }
-  </style>
+    #about p { margin-bottom: 1.5rem; }
+    #about strong { color: #f3c6c6; }
+
+    .accordion { border-top: 1px solid #333; }
+    .accordion-item { border-bottom: 1px solid #333; }
+    .accordion-header {
+      width: 100%; background: transparent; border: none; padding: 1.5rem 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; text-align: left;
+    }
+    .accordion-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: #f3c6c6; transition: color 0.3s ease; }
+    .accordion-header:hover h3 { color: #fff; }
+    .accordion-icon { font-size: 1.5rem; color: #f3c6c6; transition: transform 0.3s ease; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; padding: 0 1.5rem; }
+    .accordion-content p { font-size: 0.9rem; color: #ccc; line-height: 1.7; padding-bottom: 1.5rem; }
+    .accordion-item.active .accordion-content { max-height: 250px; }
+    .accordion-item.active .accordion-icon { transform: rotate(45deg); }
+    
+    #socials { text-align: center; }
+    #socials .subtitle { color: #ccc; max-width: 600px; margin: -1rem auto 2rem auto; }
+    .instagram-widget-container {
+        background: #1a1a1a; padding: 2rem; border-radius: 12px;
+        border: 1px solid #333; min-height: 400px;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .instagram-widget-container p { color: #888; }
+
+    .enroll-cta { text-align: center; padding: 3rem 1.5rem; }
+    .button {
+      display: inline-block; padding: 1rem 2rem; margin-top: 1rem; background: #c74b50;
+      color: #fff; border-radius: 30px; text-decoration: none; font-weight: bold;
+      font-size: 1rem; transition: background 0.3s ease, transform 0.2s ease;
+      cursor: pointer; border: none;
+    }
+    .button:hover { background: #a63e45; transform: scale(1.05); }
+
+    footer { background: #181818; text-align: center; padding: 2rem; color: #888; }
+    .social-links { margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem; }
+    .social-links a { color: #888; text-decoration: none; transition: color 0.3s; }
+    .social-links a:hover { color: #fff; }
+    .social-links svg { width: 24px; height: 24px; fill: currentColor; }
+  </style>
 </head>
 <body>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#methods">Methods</a>
-    <a href="#book">Book Now</a>
-  </nav>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#methods">Methods</a>
+    <a href="#socials">Socials</a>
+    <a href="booking.html">Book Now</a>
+  </nav>
 
-  <div class="hero">
-        <img src="hero-image.png" alt="Joanna Luca teaching hair extension techniques" />
-    <div class="overlay">
-      <h1>Excellence in Extensions</h1>
-      <h2>One-on-One Hair Extension Mentorship</h2>
-    </div>
-  </div>
+  <div class="hero">
+    <img src="hero-image.png" alt="Joanna Luca teaching hair extension techniques" />
+    <div class="overlay">
+      <h1>Excellence in Extensions</h1>
+      <h2>One-on-One Hair Extension Mentorship</h2>
+    </div>
+  </div>
 
-  <section id="about">
-    <h2 class="section-title">Meet Your Mentor</h2>
-    <p>
-      Learn directly from <strong>Joanna Luca</strong>, a master stylist with over 30 years of dedicated, hands-on experience behind the chair. After decades spent perfecting the art and craft of hair extensions, she now devotes her passion to personally mentoring stylists who are eager to elevate their skills.
-    </p>
-    <p>
-      Known for her patient and approachable teaching style, her focus is on building your confidence. Each training session is tailored specifically to you, emphasizing real-world application and the subtle details that separate good results from great ones. You'll learn not just the "how," but the critical "why" behind every single technique.
-    </p>
-    <p>
-      This is more than just a class; it’s a true mentorship. You will receive one-on-one guidance and honest feedback from an expert who lives and breathes this industry. You'll leave fully prepared and inspired to apply your new expertise immediately.
-    </p>
-  </section>
-
-  <section id="methods">
-    <h2 class="section-title">Extension Methods You Can Learn</h2>
-    <div class="accordion">
-      <div class="accordion-item">
-        <button class="accordion-header">
-          <h3>K-Tip (Keratin Bond)</h3>
-          <span class="accordion-icon">+</span>
-        </button>
-        <div class="accordion-content">
-          <p>Dive deep into the art of K-Tip extensions, a highly sought-after method known for creating natural, 360-degree movement. In this module, you will master the delicate process of attaching individual strands using a specialized heating tool to bond keratin tips.</p>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-header">
-          <h3>I-Tip & Nano Beads</h3>
-          <span class="accordion-icon">+</span>
-        </button>
-        <div class="accordion-content">
-          <p>Discover the world of heat-free extensions with I-Tips and Nano Beads. This training focuses on the meticulous strand-by-strand application using tiny, secure beads for a seamless, natural finish that is both durable and easy to maintain.</p>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-header">
-          <h3>Tape-In Extensions</h3>
-          <span class="accordion-icon">+</span>
-        </button>
-        <div class="accordion-content">
-          <p>Master the most popular and fastest method in the industry: Tape-In extensions. This course teaches efficiency and precision, covering the flawless alignment of adhesive wefts to create a full, voluminous look and damage-free removal.</p>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-header">
-          <h3>Hand-Tied Wefts</h3>
-          <span class="accordion-icon">+</span>
-        </button>
-        <div class="accordion-content">
-          <p>Learn the foundational and highly versatile technique of installing Hand-Tied Wefts. This comprehensive training will show you how to build a secure and flat foundation using beads and master correct stitching patterns for a flawless result.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="book">
-    <h2 class="section-title">Book Your Appointment</h2>
-    <p style="text-align: center; color: #ccc; margin-bottom: 2rem; line-height: 1.7;">Select your desired service and time from the schedule below.</p>
-    
-    <iframe
-      title="Square Appointments"
-      aria-label="Square Appointments"
-      style="width: 100%; height: 800px; border: none; border-radius: 8px;"
-      src="https://app.squareup.com/appointments/book/b1i7pv4z9q7bea/LYC60K7GCRJ0F/start">
-    </iframe>
-
+  <section id="about">
+    <h2 class="section-title">Meet Your Mentor</h2>
+    <p>
+      Learn directly from <strong>Joanna Luca</strong>, a master stylist with over 30 years of dedicated, hands-on experience behind the chair. After decades spent perfecting the art and craft of hair extensions, she now devotes her passion to personally mentoring stylists who are eager to elevate their skills.
+    </p>
+    <p>
+      Known for her patient and approachable teaching style, her focus is on building your confidence. Each training session is tailored specifically to you, emphasizing real-world application and the subtle details that separate good results from great ones. You'll learn not just the "how," but the critical "why" behind every single technique.
+    </p>
   </section>
 
-  <footer>
-    &copy; 2025 Private Hair Extension Training
-  </footer>
+  <section id="methods">
+    <h2 class="section-title">Extension Methods You Can Learn</h2>
+    <div class="accordion">
+        <div class="accordion-item"><button class="accordion-header"><h3>K-Tip (Keratin Bond)</h3><span class="accordion-icon">+</span></button><div class="accordion-content"><p>Dive deep into the art of K-Tip extensions, a highly sought-after method known for creating natural, 360-degree movement. In this module, you will master the delicate process of attaching individual strands using a specialized heating tool to bond keratin tips.</p></div></div>
+        <div class="accordion-item"><button class="accordion-header"><h3>I-Tip & Nano Beads</h3><span class="accordion-icon">+</span></button><div class="accordion-content"><p>Discover the world of heat-free extensions with I-Tips and Nano Beads. This training focuses on the meticulous strand-by-strand application using tiny, secure beads for a seamless, natural finish that is both durable and easy to maintain.</p></div></div>
+        <div class="accordion-item"><button class="accordion-header"><h3>Tape-In Extensions</h3><span class="accordion-icon">+</span></button><div class="accordion-content"><p>Master the most popular and fastest method in the industry: Tape-In extensions. This course teaches efficiency and precision, covering the flawless alignment of adhesive wefts to create a full, voluminous look and damage-free removal.</p></div></div>
+        <div class="accordion-item"><button class="accordion-header"><h3>Hand-Tied Wefts</h3><span class="accordion-icon">+</span></button><div class="accordion-content"><p>Learn the foundational and highly versatile technique of installing Hand-Tied Wefts. This comprehensive training will show you how to build a secure and flat foundation using beads and master correct stitching patterns for a flawless result.</p></div></div>
+    </div>
+  </section>
 
-  <script>
-    const accordionItems = document.querySelectorAll('.accordion-item');
-    accordionItems.forEach(item => {
-        const header = item.querySelector('.accordion-header');
-        header.addEventListener('click', () => {
-            const isOpen = item.classList.contains('active');
-            accordionItems.forEach(i => i.classList.remove('active'));
-            if (!isOpen) {
-                item.classList.add('active');
-            }
-        });
-    });
-  </script>
+  <section class="enroll-cta">
+    <a href="booking.html" class="button">Book Your Course Now</a>
+  </section>
+  
+  <section id="socials">
+    <h2 class="section-title">Our Latest Work</h2>
+    <p class="subtitle">Follow us on Instagram to see the latest student work and course updates.</p>
+    <div class="instagram-widget-container">
+        <p>Your Instagram feed will appear here.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Private Hair Extension Training</p>
+    <div class="social-links">
+        <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" /></svg></a>
+        <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M17,7H15A1,1 0 0,0 14,8V10H17L16.5,13H14V20H10V13H7V10H10V7.5C10,5.56 11.57,4 13.5,4H16V7Z" /></svg></a>
+    </div>
+  </footer>
+
+  <script>
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', () => {
+            const isOpen = item.classList.contains('active');
+            accordionItems.forEach(i => i.classList.remove('active'));
+            if (!isOpen) item.classList.add('active');
+        });
+    });
+  </script>
 
 </body>
 </html>
