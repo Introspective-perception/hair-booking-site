@@ -156,7 +156,7 @@
     .accordion-content p {
         font-size: 0.9rem;
         color: #ccc;
-        line-height: 1.7;
+  _      line-height: 1.7;
         padding-bottom: 1.5rem;
     }
     .accordion-item.active .accordion-content {
@@ -165,9 +165,11 @@
     .accordion-item.active .accordion-icon {
         transform: rotate(45deg);
     }
-    .enroll-cta {
+    /* This is the new Call-to-Action section for booking */
+    #book {
       text-align: center;
       padding: 3rem 1.5rem;
+      background-color: #121212;
     }
     .button {
       display: inline-block;
@@ -198,15 +200,13 @@
 </head>
 <body>
 
-  <nav>
+    <nav>
     <a href="#about">About</a>
     <a href="#methods">Methods</a>
-    <a href="enrollment.html">Enroll</a>
+    <a href="#book">Book Now</a>
   </nav>
 
   <div class="hero">
-    <!-- === IMAGE LINK UPDATED === -->
-    <!-- This now points to a file in your repository -->
     <img src="hero-image.png" alt="Joanna Luca teaching hair extension techniques" />
     <div class="overlay">
       <h1>Excellence in Extensions</h1>
@@ -269,8 +269,13 @@
     </div>
   </section>
 
-  <section class="enroll-cta">
-    <a href="enrollment.html" class="button">Go to Enrollment</a>
+  <section id="book">
+    <h2 class="section-title">Ready to Book?</h2>
+    <p style="text-align: center; color: #ccc; margin-bottom: 1.5rem; line-height: 1.7;">Click the button below to view available services and book your appointment online.</p>
+    
+    <div style="text-align: center;">
+      <a href="YOUR_SQUARE_BOOKING_LINK_HERE" class="button">Book Now</a>
+    </div>
   </section>
 
   <footer>
