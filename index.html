@@ -6,11 +6,10 @@
   <title>Expert Hair Extension Training</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* --- STYLES FROM YOUR ENROLLMENT PAGE HAVE BEEN APPLIED --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       font-family: 'Montserrat', sans-serif;
-      background: #111;
+      background: #000000;
       color: #f0f0f0;
       scroll-behavior: smooth;
     }
@@ -46,6 +45,7 @@
       height: 100vh;
       overflow: hidden;
       margin: 0;
+      background: #000; /* Fallback for when image is not loaded */
     }
     .hero img {
       position: absolute;
@@ -167,7 +167,6 @@
         transform: rotate(45deg);
     }
     #book {
-      text-align: center;
       padding: 3rem 1.5rem;
       background-color: #121212;
     }
@@ -189,7 +188,7 @@
   </nav>
 
   <div class="hero">
-    <img src="hero-image.png" alt="Joanna Luca teaching hair extension techniques" />
+        <img src="hero-image.png" alt="Joanna Luca teaching hair extension techniques" />
     <div class="overlay">
       <h1>Excellence in Extensions</h1>
       <h2>One-on-One Hair Extension Mentorship</h2>
@@ -252,11 +251,17 @@
   </section>
 
   <section id="book">
-    <h2 class="section-title">Ready to Book?</h2>
-    <p style="text-align: center; color: #ccc; margin-bottom: 1.5rem; line-height: 1.7;">Click the button below to view available services and book your appointment online.</p>
+    <h2 class="section-title">Book Your Appointment</h2>
+    <p style="text-align: center; color: #ccc; margin-bottom: 2rem; line-height: 1.7;">Select your desired service and time from the schedule below.</p>
     
-    <script src='https://square.site/appointments/buyer/widget/b1i7pv4z9q7bea/LYC60K7GCRJ0F.js'></script>
-    </section>
+    <iframe
+      title="Square Appointments"
+      aria-label="Square Appointments"
+      style="width: 100%; height: 800px; border: none; border-radius: 8px;"
+      src="https://app.squareup.com/appointments/book/b1i7pv4z9q7bea/LYC60K7GCRJ0F/start">
+    </iframe>
+
+  </section>
 
   <footer>
     &copy; 2025 Private Hair Extension Training
